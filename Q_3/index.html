@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>React To DO App</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+
+<body>
+
+    <center>
+
+        <div id="root"></div>
+
+        <script type="text/babel">
+
+            function TodoApp()
+            {
+                const [task, setTask] = React.useState("");
+
+                const [tasks, setTasks] = React.useState([]);
+
+
+                function addTask()
+                {
+                    if(task.trim() === "")
+                        return;
+
+                    setTasks([
+                        ...tasks,
+                        {
+                            text: task,
+                            completed: false
+                        }
+                    ]);
+
+                    setTask("");
+                }
+
+
+                function deleteTask(index)
+                {
+                    const newTasks = tasks.filter((t, i) => i !== index);
+
+                    setTasks(newTasks);
+                }
+
+
+                // Check / Uncheck
+                function toggleTask(index)
+                {
+                    const newTasks = tasks.map((t, i) => {
+
+                        if(i === index)
+                        {
+                            return {
+                                ...t,
+                                completed: !t.completed
+                            };
+                        }
+
+                        return t;
+
+                    });
+
+                    setTasks(newTasks);
+                }
+
+
+                return (
+
+                    <div style={{padding:"20px"}}>
+
+                        <h1>To DO App</h1>
+
+
+                        <input
+                            type="text"
+                            placeholder="Enter the Text: "
+                            value={task}
+                            onChange={(e) => setTask(e.target.value)}
+                        />
+
+
+                        <button onClick={addTask}>
+                            Add
+                        </button>
+
+
+                        <ul>
+
+                            {tasks.map((item, index) => (
+
+                                <li key={index}>
+
+                                    <span
+                                        onClick={() => toggleTask(index)}
+                                        style={{
+                                            textDecoration: item.completed
+                                                ? "line-through"
+                                                : "none",
+                                            cursor: "pointer"
+                                        }}
+                                    >
+                                        {item.text}
+                                    </span>
+
+
+                                    <button
+                                        onClick={() => deleteTask(index)}
+                                        style={{ marginLeft: "10px" }}
+                                    >
+                                        Delete
+                                    </button>
+
+                                </li>
+
+                            ))}
+
+                        </ul>
+
+                    </div>
+
+                );
+
+            }
+
+
+            const root = ReactDOM.createRoot(
+                document.getElementById("root")
+            );
+
+            root.render(<TodoApp/>);
+
+        </script>
+
+    </center>
+
+</body>
+
+</html>
