@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Components using CDN</title>
+     <!-- react cdn -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- react dom cdn -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel cdn -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+     <center>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    // <!-- Component 1 -->
+        function Header()
+        {
+            return(
+                <div>
+                <h1>Welcome to my react application</h1>
+                </div>
+            );
+        }
+
+    // <!-- component 2 -->
+        function Student()
+        {
+            return(
+                <div>
+                    <h2>Student Information</h2>
+                    <p> Name: Vaishnavi </p>
+                    <p> Course: MScIT </p>
+                    <h3> Thank you !! </h3>
+                </div>
+            );
+        }
+
+        //create react root
+        const root = ReactDOM.createRoot(
+            document.getElementById("root")
+        );
+
+        //display components
+        root.render(
+            <div>
+                <Header/>
+                <Student/>
+            </div>
+        );
+     </script>
+    </center>
+</body>
+</html>
